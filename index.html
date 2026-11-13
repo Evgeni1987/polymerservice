@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polymer Service — Belzona Eestis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#003C71;
+    --orange:#FA6A14;
+    --grey:#D0D3D4;
+    --ink:#0E2338;
+    --paper:#FFFFFF;
+    --soft:#F2F4F6;
+    --muted:#5D6B78;
+    --line:#DFE3E7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;font-size:16px}
+  h1,h2,h3{font-family:'Roboto Condensed','Inter',sans-serif;line-height:1.08;text-transform:uppercase;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+  header{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+  .logo{font-family:'Roboto Condensed';font-weight:700;font-size:24px;letter-spacing:.02em;text-transform:uppercase;color:#fff;line-height:1.05}
+  .logo span.o{color:var(--orange)}
+  .logo small{display:block;font-family:'Inter';font-weight:500;font-size:11px;color:#9FBCD6;letter-spacing:.03em;text-transform:none}
+  nav{display:flex;gap:26px;font-size:15px;font-weight:500}
+  nav a{padding-bottom:2px;border-bottom:2px solid transparent}
+  nav a:hover{border-bottom-color:var(--orange)}
+  .right{display:flex;align-items:center;gap:14px}
+  .lang button{background:none;border:none;color:#9FBCD6;font:inherit;font-size:14px;font-weight:600;cursor:pointer;padding:2px 4px}
+  .lang button.on{color:var(--orange)}
+  .cta{background:var(--orange);color:#fff;padding:11px 20px;font-weight:700;font-size:15px;border:none;cursor:pointer;font-family:'Inter'}
+  .cta:hover{background:#D9570A}
+  @media(max-width:900px){nav{display:none}}
+
+  .hero{padding:56px 0;background:var(--soft);border-bottom:3px solid var(--orange)}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:center}
+  .hero h1{font-size:clamp(34px,4.6vw,56px);font-weight:700;color:var(--navy)}
+  .hero p.lead{margin:18px 0 26px;font-size:17px;color:var(--muted);max-width:46ch}
+  .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .ghost{border:2px solid var(--navy);color:var(--navy);padding:9px 18px;font-weight:600;font-size:15px;background:transparent;cursor:pointer;font-family:'Inter'}
+  .ghost:hover{background:var(--navy);color:#fff}
+  .trust{margin-top:26px;font-size:14px;color:var(--muted)}
+  .trust b{color:var(--ink);font-weight:700}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .pair figure{position:relative;overflow:hidden;background:#000}
+  .pair img{width:100%;aspect-ratio:1;object-fit:cover}
+  .pair.tall img{aspect-ratio:4/5}
+  .pair figcaption{position:absolute;left:0;bottom:0;font-family:'Roboto Condensed';font-weight:700;font-size:14px;letter-spacing:.08em;color:#fff;background:var(--navy);padding:5px 12px}
+  .pair figure:last-child figcaption{background:var(--orange);color:#fff}
+  .pair-cap{font-size:13px;color:var(--muted);margin-top:10px}
+
+  section{padding:64px 0}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;gap:24px;flex-wrap:wrap;border-top:3px solid var(--navy);padding-top:18px}
+  .sec-head h2{font-size:clamp(26px,3.2vw,38px);font-weight:700;color:var(--navy)}
+  .sec-head p{color:var(--muted);font-size:15px;max-width:48ch}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .cell{background:#fff;padding:26px 24px;display:flex;flex-direction:column}
+  .cell:hover{background:var(--soft)}
+  .cell h3{font-size:21px;font-weight:700;margin-bottom:8px;color:var(--navy)}
+  .cell p{font-size:15px;color:var(--muted);flex:1}
+  .cell a{margin-top:14px;font-weight:600;font-size:14px;color:var(--navy);align-self:flex-start;border-bottom:2px solid var(--orange)}
+  @media(max-width:900px){.grid3{grid-template-columns:1fr}}
+
+  .why{background:var(--navy);color:#fff}
+  .why .sec-head{border-top-color:var(--orange)}
+  .why .sec-head h2{color:#fff}
+  .why .sec-head p{color:#9FBCD6}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .why-grid h3{font-size:19px;margin-bottom:8px;color:var(--orange)}
+  .why-grid p{font-size:14px;color:#C5D6E4}
+  @media(max-width:900px){.why-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.why-grid{grid-template-columns:1fr}}
+
+  .case{border:1px solid var(--line);margin-bottom:26px}
+  .case .tx{padding:22px 26px}
+  .case .tx h3{font-size:23px;margin-bottom:8px;color:var(--navy)}
+  .case .tx p{font-size:15px;color:var(--muted);max-width:80ch}
+
+  .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .strip img{width:100%;aspect-ratio:1;object-fit:cover}
+  @media(max-width:900px){.strip{grid-template-columns:1fr}}
+
+  .range{background:var(--soft);padding:34px;margin-top:30px;display:grid;grid-template-columns:1.25fr 1fr;gap:38px;align-items:start;border-left:4px solid var(--orange)}
+  .range h3{font-size:24px;margin-bottom:10px;color:var(--navy)}
+  .range p{font-size:15px;color:var(--muted)}
+  .range ul{list-style:none;margin-top:14px;font-size:15px}
+  .range li{padding:8px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+  .range li:last-child{border-bottom:none}
+  .range li b{color:var(--navy);font-family:'Roboto Condensed';font-size:17px;margin-right:8px;text-transform:uppercase}
+  .range .box h3{font-size:20px}
+  @media(max-width:900px){.range{grid-template-columns:1fr;padding:24px}}
+
+  .rfq{background:var(--navy);color:#fff}
+  .rfq .inner{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  .rfq h2{font-size:clamp(26px,3.2vw,36px);color:#fff;margin-bottom:12px}
+  .rfq .note{color:#C5D6E4;font-size:15px;max-width:42ch}
+  .rfq .note b{color:var(--orange)}
+  .contacts{margin-top:24px;font-size:16px;line-height:1.9}
+  .contacts a{color:#fff;border-bottom:1px solid var(--orange)}
+  .contacts span.lbl{color:#9FBCD6}
+  .f{display:grid;gap:14px;background:#fff;padding:26px;color:var(--ink)}
+  .f label{font-size:13px;font-weight:600;display:block;margin-bottom:5px}
+  .f input,.f textarea{width:100%;padding:11px 12px;border:1px solid var(--line);font:inherit;font-size:15px;background:var(--soft)}
+  .f input:focus,.f textarea:focus{outline:2px solid var(--navy);outline-offset:-1px}
+  @media(max-width:900px){.rfq .inner{grid-template-columns:1fr}}
+
+  footer{padding:28px 0;color:var(--muted);font-size:13.5px;background:var(--soft)}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#">POLYMER <span class="o">SERVICE</span><small><span data-et="Belzona edasimüüja Eestis" data-ru="Поставщик Belzona в Эстонии">Belzona edasimüüja Eestis</span></small></a>
+    <nav>
+      <a href="#lahendused"><span data-et="Lahendused" data-ru="Решения">Lahendused</span></a>
+      <a href="#tood"><span data-et="Tehtud tööd" data-ru="Работы">Tehtud tööd</span></a>
+      <a href="#tooted"><span data-et="Tooted" data-ru="Материалы">Tooted</span></a>
+      <a href="#kontakt"><span data-et="Kontakt" data-ru="Контакты">Kontakt</span></a>
+    </nav>
+    <div class="right">
+      <span class="lang"><button id="bt-et" class="on" onclick="setLang('et')">ET</button><button id="bt-ru" onclick="setLang('ru')">RU</button></span>
+      <button class="cta" onclick="document.getElementById('kontakt').scrollIntoView()"><span data-et="Küsi pakkumist" data-ru="Запросить цену">Küsi pakkumist</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1><span data-et="Parandame selle, mida teised vahetavad välja." data-ru="Восстанавливаем то, что другие меняют.">Parandame selle, mida teised vahetavad välja.</span></h1>
+      <p class="lead"><span data-et="Belzona polümeermaterjalid pumpade, soojusvahetite, torustike ja seadmete taastamiseks — ilma keevitamata, sageli ilma pikema seisakuta. Tööstusele, energeetikale ja laevandusele. Ladu Eestis." data-ru="Полимерные материалы Belzona для восстановления насосов, теплообменников, трубопроводов и оборудования — без сварки, часто без длительной остановки. Для промышленности, энергетики и судоходства. Склад в Эстонии.">Belzona polümeermaterjalid pumpade, soojusvahetite, torustike ja seadmete taastamiseks — ilma keevitamata, sageli ilma pikema seisakuta. Tööstusele, energeetikale ja laevandusele. Ladu Eestis.</span></p>
+      <div class="actions">
+        <button class="cta" onclick="document.getElementById('kontakt').scrollIntoView()"><span data-et="Kirjelda probleemi" data-ru="Опишите задачу">Kirjelda probleemi</span></button>
+        <button class="ghost" onclick="document.getElementById('tood').scrollIntoView()"><span data-et="Vaata tehtud töid" data-ru="Смотреть работы">Vaata tehtud töid</span></button>
+      </div>
+      <p class="trust" data-et='Turul alates <b>2012</b> · Belzona edasimüüja Eestis · Tööstus, energeetika, laevandus' data-ru='На рынке с <b>2012</b> · Поставщик Belzona в Эстонии · Промышленность, энергетика, судоходство'>Turul alates <b>2012</b> · Belzona edasimüüja Eestis · Tööstus, energeetika, laevandus</p>
+    </div>
+    <div>
+      <div class="pair">
+        <figure><img loading="lazy" src="img/foto1.jpg" alt=""><figcaption><span data-et="ENNE" data-ru="ДО">ENNE</span></figcaption></figure>
+        <figure><img loading="lazy" src="img/foto2.jpg" alt=""><figcaption><span data-et="PÄRAST" data-ru="ПОСЛЕ">PÄRAST</span></figcaption></figure>
+      </div>
+      <p class="pair-cap"><span data-et="Jahutussüsteemi veekambrid: sügav korrosioon → taastatud ja kaitstud Belzona keraamilise kattega." data-ru="Водяные камеры системы охлаждения: глубокая коррозия → восстановлены и защищены керамическим покрытием Belzona.">Jahutussüsteemi veekambrid: sügav korrosioon → taastatud ja kaitstud Belzona keraamilise kattega.</span></p>
+    </div>
+  </div>
+</div>
+
+<section id="lahendused">
+  <div class="wrap">
+    <div class="sec-head"><h2><span data-et="Lahendused probleemi järgi" data-ru="Решения по задачам">Lahendused probleemi järgi</span></h2><p><span data-et="Ei pea teadma tootekoodi — kirjelda probleemi ja pakume materjali, koguse ja tööjuhise." data-ru="Не нужно знать код материала — опишите проблему, подберём материал, количество и технологию.">Ei pea teadma tootekoodi — kirjelda probleemi ja pakume materjali, koguse ja tööjuhise.</span></p></div>
+    <div class="grid3">
+      <div class="cell"><h3><span data-et="Pumbad" data-ru="Насосы">Pumbad</span></h3><p><span data-et="Tööratta, korpuse ja veekambrite erosiooni- ja korrosioonikahjustuste taastamine, kavitatsioonikaitse." data-ru="Восстановление рабочих колёс, корпусов и водяных камер после эрозии и коррозии, защита от кавитации.">Tööratta, korpuse ja veekambrite erosiooni- ja korrosioonikahjustuste taastamine, kavitatsioonikaitse.</span></p><a href="#kontakt"><span data-et="Küsi lahendust" data-ru="Запросить решение">Küsi lahendust</span></a></div>
+      <div class="cell"><h3><span data-et="Soojusvahetid" data-ru="Теплообменники">Soojusvahetid</span></h3><p><span data-et="Torulaudade, otsakaante ja veekambrite taastamine ning galvaanilise korrosiooni tõkestamine." data-ru="Восстановление трубных досок, крышек и водяных камер, защита от гальванической коррозии.">Torulaudade, otsakaante ja veekambrite taastamine ning galvaanilise korrosiooni tõkestamine.</span></p><a href="#kontakt"><span data-et="Küsi lahendust" data-ru="Запросить решение">Küsi lahendust</span></a></div>
+      <div class="cell"><h3><span data-et="Torustikud ja mahutid" data-ru="Трубопроводы и ёмкости">Torustikud ja mahutid</span></h3><p><span data-et="Lekete kõrvaldamine, bandaažremont, sise- ja välispindade kaitsekatted." data-ru="Устранение течей, бандажный ремонт, защитные покрытия внутренних и наружных поверхностей.">Lekete kõrvaldamine, bandaažremont, sise- ja välispindade kaitsekatted.</span></p><a href="#kontakt"><span data-et="Küsi lahendust" data-ru="Запросить решение">Küsi lahendust</span></a></div>
+      <div class="cell"><h3><span data-et="Võllid ja laagripesad" data-ru="Валы и посадочные места">Võllid ja laagripesad</span></h3><p><span data-et="Kulunud istepindade, liistusoonte ja keermete taastamine — sageli ilma demontaažita." data-ru="Восстановление изношенных посадок, шпоночных пазов и резьб — часто без демонтажа.">Kulunud istepindade, liistusoonte ja keermete taastamine — sageli ilma demontaažita.</span></p><a href="#kontakt"><span data-et="Küsi lahendust" data-ru="Запросить решение">Küsi lahendust</span></a></div>
+      <div class="cell"><h3><span data-et="Korrosioonikaitse" data-ru="Антикоррозийная защита">Korrosioonikaitse</span></h3><p><span data-et="Kemikaali- ja kulumiskindlad pinnakatted seadmetele, tankidele ja konstruktsioonidele." data-ru="Химстойкие и износостойкие покрытия для оборудования, танков и конструкций.">Kemikaali- ja kulumiskindlad pinnakatted seadmetele, tankidele ja konstruktsioonidele.</span></p><a href="#kontakt"><span data-et="Küsi lahendust" data-ru="Запросить решение">Küsi lahendust</span></a></div>
+      <div class="cell"><h3><span data-et="Kumm ja betoon" data-ru="Резина и бетон">Kumm ja betoon</span></h3><p><span data-et="Rullikute, demprite ja konveieridetailide remont; põrandate ja vundamentide taastamine." data-ru="Ремонт роликов, демпферов и деталей конвейеров; восстановление полов и фундаментов.">Rullikute, demprite ja konveieridetailide remont; põrandate ja vundamentide taastamine.</span></p><a href="#kontakt"><span data-et="Küsi lahendust" data-ru="Запросить решение">Küsi lahendust</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="sec-head"><h2><span data-et="Miks Belzona?" data-ru="Почему Belzona?">Miks Belzona?</span></h2><p><span data-et="60+ aastat tööstuslikke polümeerlahendusi, kasutusel energeetikas, töötlevas tööstuses ja laevanduses üle maailma." data-ru="60+ лет промышленных полимерных решений, применяются в энергетике, перерабатывающей промышленности и судоходстве по всему миру.">60+ aastat tööstuslikke polümeerlahendusi, kasutusel energeetikas, töötlevas tööstuses ja laevanduses üle maailma.</span></p></div>
+    <div class="why-grid">
+      <div><h3><span data-et="Ilma keevitamata" data-ru="Без сварки">Ilma keevitamata</span></h3><p><span data-et="Külmpaigaldus — ei mingit tuletööde luba, deformatsiooni ega pingeid materjalis." data-ru="Холодное нанесение — без огневых работ, деформаций и напряжений в металле.">Külmpaigaldus — ei mingit tuletööde luba, deformatsiooni ega pingeid materjalis.</span></p></div>
+      <div><h3><span data-et="Lühem seisak" data-ru="Меньше простой">Lühem seisak</span></h3><p><span data-et="Paljud remondid tehakse kohapeal, seadet täielikult demonteerimata." data-ru="Многие ремонты выполняются на месте, без полного демонтажа оборудования.">Paljud remondid tehakse kohapeal, seadet täielikult demonteerimata.</span></p></div>
+      <div><h3><span data-et="Ladu Eestis" data-ru="Склад в Эстонии">Ladu Eestis</span></h3><p><span data-et="Põhimaterjalid kohapeal — ei pea ootama tarnet välismaalt." data-ru="Основные материалы на месте — не нужно ждать поставку из-за рубежа.">Põhimaterjalid kohapeal — ei pea ootama tarnet välismaalt.</span></p></div>
+      <div><h3><span data-et="Väiksem kulu" data-ru="Ниже затраты">Väiksem kulu</span></h3><p><span data-et="Taastamine maksab tüüpiliselt murdosa uue detaili hinnast ja tarneajast." data-ru="Восстановление обычно стоит доли цены новой детали и не требует долгой поставки.">Taastamine maksab tüüpiliselt murdosa uue detaili hinnast ja tarneajast.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tood">
+  <div class="wrap">
+    <div class="sec-head"><h2><span data-et="Tehtud tööd" data-ru="Выполненные работы">Tehtud tööd</span></h2><p><span data-et="Päris detailid, päris kahjustused, sama detail enne ja pärast." data-ru="Реальные детали, реальные повреждения, одна и та же деталь до и после.">Päris detailid, päris kahjustused, sama detail enne ja pärast.</span></p></div>
+
+    <div class="case">
+      <div class="pair"><figure><img loading="lazy" src="img/foto3.jpg" alt=""><figcaption><span data-et="ENNE" data-ru="ДО">ENNE</span></figcaption></figure><figure><img loading="lazy" src="img/foto4.jpg" alt=""><figcaption><span data-et="PÄRAST" data-ru="ПОСЛЕ">PÄRAST</span></figcaption></figure></div>
+      <div class="tx"><h3><span data-et="Soojusvaheti otsakaaned" data-ru="Крышки теплообменника">Soojusvaheti otsakaaned</span></h3><p><span data-et="Merevee põhjustatud sügav korrosioon ja läbisööbimised. Pinnad puhastati abrasiivtöötlusega, geomeetria taastati ja kaeti kahekihilise Belzona kaitsekattega. Kaaned tagasi töös uue detaili hinnast murdosaga." data-ru="Глубокая коррозия и сквозные разрушения от морской воды. Поверхности подготовлены абразивной обработкой, геометрия восстановлена, нанесено двухслойное защитное покрытие Belzona. Крышки вернулись в работу за долю стоимости новых.">Merevee põhjustatud sügav korrosioon ja läbisööbimised. Pinnad puhastati abrasiivtöötlusega, geomeetria taastati ja kaeti kahekihilise Belzona kaitsekattega. Kaaned tagasi töös uue detaili hinnast murdosaga.</span></p></div>
+    </div>
+
+    <div class="case">
+      <div class="pair tall"><figure><img loading="lazy" src="img/foto5.jpg" alt=""><figcaption><span data-et="ENNE" data-ru="ДО">ENNE</span></figcaption></figure><figure><img loading="lazy" src="img/foto6.jpg" alt=""><figcaption><span data-et="PÄRAST" data-ru="ПОСЛЕ">PÄRAST</span></figcaption></figure></div>
+      <div class="tx"><h3><span data-et="Pumba tööratas" data-ru="Рабочее колесо насоса">Pumba tööratas</span></h3><p><span data-et="Erosioon ja kavitatsioon olid söönud labadesse augud — tavapärane otsus oleks uus tööratas ja nädalatepikkune tarneaeg. Geomeetria taastati Belzona komposiitmaterjaliga ja kaeti siledaks kulumiskindla kihiga, mis parandab ka pumba kasutegurit. Seisak päevades, mitte nädalates." data-ru="Эрозия и кавитация проели в лопатках сквозные отверстия — стандартное решение означало новое колесо и недели поставки. Геометрия восстановлена композитом Belzona и выведена гладким износостойким слоем, который дополнительно повышает КПД насоса. Простой в днях, а не в неделях.">Erosioon ja kavitatsioon olid söönud labadesse augud — tavapärane otsus oleks uus tööratas ja nädalatepikkune tarneaeg. Geomeetria taastati Belzona komposiitmaterjaliga ja kaeti siledaks kulumiskindla kihiga, mis parandab ka pumba kasutegurit. Seisak päevades, mitte nädalates.</span></p></div>
+    </div>
+
+    <div class="case">
+      <div class="pair tall"><figure><img loading="lazy" src="img/foto7.jpg" alt=""><figcaption><span data-et="TÖÖ KÄIGUS" data-ru="В РАБОТЕ">TÖÖ KÄIGUS</span></figcaption></figure><figure><img loading="lazy" src="img/foto8.jpg" alt=""><figcaption><span data-et="TÖÖ KÄIGUS" data-ru="В РАБОТЕ">TÖÖ KÄIGUS</span></figcaption></figure></div>
+      <div class="tx"><h3><span data-et="Põtkuri korpus" data-ru="Корпус подруливающего устройства">Põtkuri korpus</span></h3><p><span data-et="Sügav korrosioon oli kahjustanud korpuse terviklikkust. Töö kiireloomulisuse tõttu otsustati kahjustus kõrvaldada lokaalselt, ilma korpust välja vahetamata. Kahjustatud alad ehitati üles Belzona metallitäidisega. Mehhanism paigaldati tagasi 6 tunni pärast." data-ru="Глубокая коррозия с нарушением целостности корпуса. Из-за срочности было принято решение устранить повреждение локально, без замены корпуса. Повреждённые участки наращены металлонаполненным составом Belzona. Через 6 часов механизм поставили на место.">Sügav korrosioon oli kahjustanud korpuse terviklikkust. Töö kiireloomulisuse tõttu otsustati kahjustus kõrvaldada lokaalselt, ilma korpust välja vahetamata. Kahjustatud alad ehitati üles Belzona metallitäidisega. Mehhanism paigaldati tagasi 6 tunni pärast.</span></p></div>
+    </div>
+
+    <div class="strip">
+      <img loading="lazy" src="img/foto9.jpg" alt="">
+      <img loading="lazy" src="img/foto10.jpg" alt="">
+      <img loading="lazy" src="img/foto11.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="tooted">
+  <div class="wrap">
+    <div class="sec-head"><h2><span data-et="Materjalid" data-ru="Материалы">Materjalid</span></h2><p><span data-et="Enimkasutatavad materjalid laos Eestis — suured pakendid töövõtjatele ja väikesed ühekordsed pakendid kiireks remondiks." data-ru="Самые востребованные материалы на складе в Эстонии — большие упаковки для подрядчиков и малые одноразовые для срочного ремонта.">Enimkasutatavad materjalid laos Eestis — suured pakendid töövõtjatele ja väikesed ühekordsed pakendid kiireks remondiks.</span></p></div>
+    <div class="grid3">
+      <div class="cell"><h3><span data-et="Belzona 1111 Super Metal" data-ru="Belzona 1111 Super Metal">Belzona 1111 Super Metal</span></h3><p><span data-et="Universaalne metallitäidis: võllid, korpused, äärikud, üldine metalliremont. Laos 1 kg ja 2 kg." data-ru="Универсальный металлонаполненный состав: валы, корпуса, фланцы, общий ремонт металла. На складе 1 кг и 2 кг.">Universaalne metallitäidis: võllid, korpused, äärikud, üldine metalliremont. Laos 1 kg ja 2 kg.</span></p><a href="#kontakt"><span data-et="Küsi hinda" data-ru="Запросить цену">Küsi hinda</span></a></div>
+      <div class="cell"><h3><span data-et="Belzona 1212" data-ru="Belzona 1212">Belzona 1212</span></h3><p><span data-et="Nakkub märja ja õlise pinnaga — avariiremont ilma pikema ettevalmistuseta. Pakend 450 g." data-ru="Адгезия к влажным и замасленным поверхностям — аварийный ремонт без долгой подготовки. Упаковка 450 г.">Nakkub märja ja õlise pinnaga — avariiremont ilma pikema ettevalmistuseta. Pakend 450 g.</span></p><a href="#kontakt"><span data-et="Küsi hinda" data-ru="Запросить цену">Küsi hinda</span></a></div>
+      <div class="cell"><h3><span data-et="Belzona 1341 Supermetalglide" data-ru="Belzona 1341 Supermetalglide">Belzona 1341 Supermetalglide</span></h3><p><span data-et="Sile kulumiskindel kate pumpadele ja torustikele — vähendab hõõrdumist ja tõstab kasutegurit." data-ru="Гладкое износостойкое покрытие для насосов и трубопроводов — снижает трение и повышает КПД.">Sile kulumiskindel kate pumpadele ja torustikele — vähendab hõõrdumist ja tõstab kasutegurit.</span></p><a href="#kontakt"><span data-et="Küsi hinda" data-ru="Запросить цену">Küsi hinda</span></a></div>
+      <div class="cell"><h3><span data-et="Belzona 1221 Super E-Metal" data-ru="Belzona 1221 Super E-Metal">Belzona 1221 Super E-Metal</span></h3><p><span data-et="Kiire kivinemisega remondimaterjal — väikepakend 125 g kohapealseks kiireks tööks." data-ru="Быстроотверждаемый ремонтный состав — малая упаковка 125 г для быстрых работ на месте.">Kiire kivinemisega remondimaterjal — väikepakend 125 g kohapealseks kiireks tööks.</span></p><a href="#kontakt"><span data-et="Küsi hinda" data-ru="Запросить цену">Küsi hinda</span></a></div>
+      <div class="cell"><h3><span data-et="Belzona 1391T HI-Temp" data-ru="Belzona 1391T HI-Temp">Belzona 1391T HI-Temp</span></h3><p><span data-et="Erosiooni- ja korrosioonikate kõrgetele töötemperatuuridele — soojusvahetid, kuumad torustikud." data-ru="Эрозионно-коррозионное покрытие для высоких рабочих температур — теплообменники, горячие трубопроводы.">Erosiooni- ja korrosioonikate kõrgetele töötemperatuuridele — soojusvahetid, kuumad torustikud.</span></p><a href="#kontakt"><span data-et="Küsi hinda" data-ru="Запросить цену">Küsi hinda</span></a></div>
+      <div class="cell"><h3><span data-et="Belzona 2141 / 2311 elastomeerid" data-ru="Эластомеры Belzona 2141 / 2311">Belzona 2141 / 2311 elastomeerid</span></h3><p><span data-et="Kummidetailide, rullikute ja löögikoormusega pindade remont ja kaitse." data-ru="Ремонт и защита резиновых деталей, роликов и поверхностей с ударными нагрузками.">Kummidetailide, rullikute ja löögikoormusega pindade remont ja kaitse.</span></p><a href="#kontakt"><span data-et="Küsi hinda" data-ru="Запросить цену">Küsi hinda</span></a></div>
+    </div>
+
+    <div class="range">
+      <div>
+        <h3><span data-et="Belzona täisvalik — üle 100 toote tellimisel" data-ru="Полный ассортимент Belzona — более 100 продуктов под заказ">Belzona täisvalik — üle 100 toote tellimisel</span></h3>
+        <p><span data-et="Laos hoiame kõige nõutumat. Kogu ülejäänud Belzona sortiment on tellitav 2–5 tööpäevaga:" data-ru="На складе держим самое востребованное. Весь остальной ассортимент Belzona поставляется за 2–5 рабочих дней:">Laos hoiame kõige nõutumat. Kogu ülejäänud Belzona sortiment on tellitav 2–5 tööpäevaga:</span></p>
+        <ul>
+          <li data-et='<b>1000-seeria</b> metallide remont ja kaitse' data-ru='<b>серия 1000</b> ремонт и защита металла'><b>1000-seeria</b> metallide remont ja kaitse</li>
+          <li data-et='<b>2000-seeria</b> elastomeerid: kumm, löögi- ja kulumiskindlus' data-ru='<b>серия 2000</b> эластомеры: резина, ударо- и износостойкость'><b>2000-seeria</b> elastomeerid: kumm, löögi- ja kulumiskindlus</li>
+          <li data-et='<b>3000-seeria</b> katuste ja lekete hermetiseerimine' data-ru='<b>серия 3000</b> герметизация кровель и течей'><b>3000-seeria</b> katuste ja lekete hermetiseerimine</li>
+          <li data-et='<b>4000-seeria</b> betooni remont ja keemiakaitse' data-ru='<b>серия 4000</b> ремонт бетона и химзащита'><b>4000-seeria</b> betooni remont ja keemiakaitse</li>
+          <li data-et='<b>5000-seeria</b> pinnakatted: korrosioon, kemikaalid, kõrge temperatuur' data-ru='<b>серия 5000</b> покрытия: коррозия, химия, высокие температуры'><b>5000-seeria</b> pinnakatted: korrosioon, kemikaalid, kõrge temperatuur</li>
+          <li data-et='<b>9000-seeria</b> puhastid, armeerimislindid, tarvikud' data-ru='<b>серия 9000</b> очистители, армирующие ленты, расходники'><b>9000-seeria</b> puhastid, armeerimislindid, tarvikud</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3><span data-et="Ei tea, millist materjali vajad?" data-ru="Не знаете, какой материал нужен?">Ei tea, millist materjali vajad?</span></h3>
+        <p><span data-et="Saada foto ja lühikirjeldus — valime õige toote, arvutame koguse ja anname tööjuhise. Tasuta ja kohustusteta." data-ru="Пришлите фото и краткое описание — подберём материал, рассчитаем количество и дадим технологию. Бесплатно и без обязательств.">Saada foto ja lühikirjeldus — valime õige toote, arvutame koguse ja anname tööjuhise. Tasuta ja kohustusteta.</span></p>
+        <button class="cta" style="margin-top:18px" onclick="document.getElementById('kontakt').scrollIntoView()"><span data-et="Kirjelda probleemi" data-ru="Опишите задачу">Kirjelda probleemi</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" class="rfq">
+  <div class="wrap inner">
+    <div>
+      <h2><span data-et="Kirjelda probleemi — pakume lahenduse" data-ru="Опишите задачу — предложим решение">Kirjelda probleemi — pakume lahenduse</span></h2>
+      <p class="note" data-et='Saada foto kahjustusest ja lühikirjeldus. Vastame <b>ühe tööpäeva jooksul</b> konkreetse materjali, koguse ja hinnaga. Vajadusel tuleme objektile.' data-ru='Пришлите фото повреждения и краткое описание. Ответим <b>в течение одного рабочего дня</b> с конкретным материалом, количеством и ценой. При необходимости выезжаем на объект.'>Saada foto kahjustusest ja lühikirjeldus. Vastame <b>ühe tööpäeva jooksul</b> konkreetse materjali, koguse ja hinnaga. Vajadusel tuleme objektile.</p>
+      <div class="contacts">
+        <a href="tel:+37256680787">+372 5668 0787</a><br>
+        <a href="mailto:info@polymerservice.ee">info@polymerservice.ee</a><br>
+        <span class="lbl"><span data-et="Ladu" data-ru="Склад">Ladu</span>:</span> Sinikivi tee 12, Jüri
+      </div>
+    </div>
+    <div class="f">
+      <div><label><span data-et="Nimi" data-ru="Имя">Nimi</span></label><input type="text" name="nimi" required data-ph-et="Sinu nimi" data-ph-ru="Ваше имя" placeholder="Sinu nimi"></div>
+      <div><label><span data-et="Ettevõte" data-ru="Компания">Ettevõte</span></label><input type="text" name="ettevote" data-ph-et="Ettevõte" data-ph-ru="Компания" placeholder="Ettevõte"></div>
+      <div><label><span data-et="E-post või telefon" data-ru="E-mail или телефон">E-post või telefon</span></label><input type="text" name="kontakt" required placeholder="kontakt@ettevote.ee"></div>
+      <div><label><span data-et="Probleemi kirjeldus" data-ru="Описание задачи">Probleemi kirjeldus</span></label><textarea rows="4" name="kirjeldus" required data-ph-et="Nt: jahutusvee pumba veekambris sügav korrosioon…" data-ph-ru="Напр.: глубокая коррозия в водяной камере насоса охлаждения…" placeholder="Nt: jahutusvee pumba veekambris sügav korrosioon…"></textarea></div>
+      <button class="cta" type="button" onclick="composeMail()"><span data-et="Saada päring" data-ru="Отправить запрос">Saada päring</span></button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span><span data-et="Polymer Service OÜ · turul alates 2012 · Belzona edasimüüja Eestis" data-ru="Polymer Service OÜ · на рынке с 2012 · поставщик Belzona в Эстонии">Polymer Service OÜ · turul alates 2012 · Belzona edasimüüja Eestis</span></span>
+    <span><span data-et="Belzona® on Belzona International Ltd. registreeritud kaubamärk" data-ru="Belzona® — зарегистрированный товарный знак Belzona International Ltd.">Belzona® on Belzona International Ltd. registreeritud kaubamärk</span></span>
+  </div>
+</footer>
+
+<script>
+function composeMail(){
+  var g=function(n){var e=document.querySelector('[name="'+n+'"]');return e?e.value:'';};
+  var body="Nimi / Имя: "+g('nimi')+"\nEttevõte / Компания: "+g('ettevote')+"\nKontakt: "+g('kontakt')+"\n\n"+g('kirjeldus');
+  window.location.href="mailto:info@polymerservice.ee?subject="+encodeURIComponent("Päring veebilehelt / Запрос с сайта")+"&body="+encodeURIComponent(body);
+}
+
+function setLang(l){
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-'+l+']').forEach(function(el){
+    el.innerHTML = el.getAttribute('data-'+l);
+  });
+  document.querySelectorAll('[data-ph-'+l+']').forEach(function(el){
+    el.placeholder = el.getAttribute('data-ph-'+l);
+  });
+  document.getElementById('bt-et').classList.toggle('on', l==='et');
+  document.getElementById('bt-ru').classList.toggle('on', l==='ru');
+}
+</script>
+</body>
+</html>
