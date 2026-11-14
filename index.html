@@ -284,13 +284,19 @@
         <span class="lbl"><span data-et="Ladu" data-ru="Склад">Ladu</span>:</span> Sinikivi tee 12, Jüri
       </div>
     </div>
-    <div class="f">
+    <form class="f" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="b098eb83-e00f-429b-af53-5cbd4ef93ab5">
+      <input type="hidden" name="subject" value="Paring polymerservice.ee lehelt">
+      <input type="hidden" name="from_name" value="polymerservice.ee">
+      <input type="hidden" name="redirect" value="https://polymerservice.ee/aitah.html">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
       <div><label><span data-et="Nimi" data-ru="Имя">Nimi</span></label><input type="text" name="nimi" required data-ph-et="Sinu nimi" data-ph-ru="Ваше имя" placeholder="Sinu nimi"></div>
       <div><label><span data-et="Ettevõte" data-ru="Компания">Ettevõte</span></label><input type="text" name="ettevote" data-ph-et="Ettevõte" data-ph-ru="Компания" placeholder="Ettevõte"></div>
       <div><label><span data-et="E-post või telefon" data-ru="E-mail или телефон">E-post või telefon</span></label><input type="text" name="kontakt" required placeholder="kontakt@ettevote.ee"></div>
       <div><label><span data-et="Probleemi kirjeldus" data-ru="Описание задачи">Probleemi kirjeldus</span></label><textarea rows="4" name="kirjeldus" required data-ph-et="Nt: jahutusvee pumba veekambris sügav korrosioon…" data-ph-ru="Напр.: глубокая коррозия в водяной камере насоса охлаждения…" placeholder="Nt: jahutusvee pumba veekambris sügav korrosioon…"></textarea></div>
-      <button class="cta" type="button" onclick="composeMail()"><span data-et="Saada päring" data-ru="Отправить запрос">Saada päring</span></button>
-    </div>
+      <p style="font-size:13px;color:var(--muted);margin-top:-4px"><span data-et="Fotod palun saada e-kirjaga: info@polymerservice.ee" data-ru="Фото пришлите письмом: info@polymerservice.ee">Fotod palun saada e-kirjaga: info@polymerservice.ee</span></p>
+      <button class="cta" type="submit"><span data-et="Saada päring" data-ru="Отправить запрос">Saada päring</span></button>
+    </form>
   </div>
 </section>
 
@@ -302,11 +308,6 @@
 </footer>
 
 <script>
-function composeMail(){
-  var g=function(n){var e=document.querySelector('[name="'+n+'"]');return e?e.value:'';};
-  var body="Nimi / Имя: "+g('nimi')+"\nEttevõte / Компания: "+g('ettevote')+"\nKontakt: "+g('kontakt')+"\n\n"+g('kirjeldus');
-  window.location.href="mailto:info@polymerservice.ee?subject="+encodeURIComponent("Päring veebilehelt / Запрос с сайта")+"&body="+encodeURIComponent(body);
-}
 
 function setLang(l){
   document.documentElement.lang = l;
